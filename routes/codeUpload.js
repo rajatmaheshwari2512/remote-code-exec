@@ -1,5 +1,6 @@
 var express = require("express");
-var bodyParser = require("body-parser");
+var fs = require("fs");
+
 var router = express.Router();
 router
   .get("/", (req, res, next) => {
@@ -7,7 +8,10 @@ router
   })
   .post("/", (req, res, next) => {
     const code = req.body;
-    console.log(code);
+    fs.writeFile("input.txt", code, (err) => {
+      if (err) return console.log(err);
+      console.log(code);
+    });
     res.json({ success: true });
   });
 module.exports = router;
