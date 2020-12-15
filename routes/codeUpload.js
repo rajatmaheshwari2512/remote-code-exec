@@ -1,17 +1,17 @@
 var express = require("express");
 var fs = require("fs");
-
+var { languageCode } = require("../shared/languageCode");
 var router = express.Router();
+
 router
   .get("/", (req, res, next) => {
     res.json({ APIWorking: true });
   })
   .post("/", (req, res, next) => {
     const code = req.body;
-    fs.writeFile("input.txt", code, (err) => {
-      if (err) return console.log(err);
-      console.log(code);
-    });
-    res.json({ success: true });
+    console.log(code);
+    console.log(languageCode[code.langid]);
+    console.log(req.body.code);
+    res.end();
   });
 module.exports = router;
