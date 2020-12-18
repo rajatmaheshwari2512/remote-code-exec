@@ -3,6 +3,7 @@ const exec = util.promisify(require("child_process").exec);
 var express = require("express");
 var fs = require("fs");
 var { languageCode } = require("../shared/languageCode");
+var { pythonList } = require("../shared/blacklist");
 var router = express.Router();
 router.post("/", (req, res, next) => {
   const code = req.body.code;
