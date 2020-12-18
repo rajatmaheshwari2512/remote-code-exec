@@ -67,7 +67,10 @@ router.post("/", (req, res, next) => {
       } else {
         fs.writeFile("input.txt", input, (err) => {
           if (err) res.json({ error: err });
-          exec("python input.py <input.txt")
+          exec("python input.py <input.txt", {
+            timeout: 10000,
+            maxBuffer: 100000,
+          })
             .then((result) => {
               res.json(result);
               exec("rm input.py").then((resp) =>
