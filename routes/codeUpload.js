@@ -1,40 +1,94 @@
+const util = require("util");
+const exec = util.promisify(require("child_process").exec);
 var express = require("express");
-var cmd = require("node-cmd");
 var fs = require("fs");
 var { languageCode } = require("../shared/languageCode");
 var router = express.Router();
-var output;
 router.post("/", (req, res, next) => {
   const code = req.body.code;
   const langid = req.body.langid;
   const input = req.body.input;
-  fs.writeFileSync(`input.${languageCode[langid]}`, code, (err) => {
-    if (err) return console.log(err);
+  console.log(langid, input);
+  fs.writeFile(`input.${languageCode[langid]}`, code, (err) => {
+    if (err) res.json({ error: err });
+    if (langid == 1) {
+      if (!input) {
+        exec("g++ input.cpp && ./a.out", { timeout: 5000, maxBuffer: 50000 })
+          .then((result) => {
+            res.json(result);
+            exec("rm input.cpp && rm a.out").then((resp) =>
+              console.log("CPP File Deleted")
+            );
+          })
+          .catch((err) => {
+            res.json(err);
+            exec("rm input.cpp && rm a.out").then((resp) =>
+              console.log("CPP File Deleted")
+            );
+          });
+      } else {
+        fs.writeFile("input.txt", input, (err) => {
+          if (err) res.json({ error: err });
+          exec("g++ input.cpp && ./a.out <input.txt", {
+            timeout: 5000,
+            maxBuffer: 50000,
+          })
+            .then((result) => {
+              res.json(result);
+              exec("rm input.cpp && rm a.out").then((resp) =>
+                console.log("CPP File Deleted")
+              );
+              exec("rm input.txt").then((resp) =>
+                console.log("Input CPP Deleted")
+              );
+            })
+            .catch((err) => {
+              res.json(err);
+              exec("rm input.cpp && rm a.out").then((resp) =>
+                console.log("CPP File Deleted")
+              );
+              exec("rm input.txt").then((resp) =>
+                console.log("Input CPP Deleted")
+              );
+            });
+        });
+      }
+    } else if (langid == 2) {
+      if (!input) {
+        exec("python input.py", { timeout: 10000, maxBuffer: 100000 })
+          .then((result) => {
+            res.json(result);
+            exec("rm input.py").then((resp) => console.log("PY File Deleted"));
+          })
+          .catch((err) => {
+            res.json(err);
+            exec("rm input.py").then((resp) => console.log("PY File Deleted"));
+          });
+      } else {
+        fs.writeFile("input.txt", input, (err) => {
+          if (err) res.json({ error: err });
+          exec("python input.py <input.txt")
+            .then((result) => {
+              res.json(result);
+              exec("rm input.py").then((resp) =>
+                console.log("PY File Deleted")
+              );
+              exec("rm input.txt").then((resp) =>
+                console.log("Input PY Deleted")
+              );
+            })
+            .catch((err) => {
+              res.json(err);
+              exec("rm input.py").then((resp) =>
+                console.log("PY File Deleted")
+              );
+              exec("rm input.txt").then((resp) =>
+                console.log("Input PY Deleted")
+              );
+            });
+        });
+      }
+    }
   });
-  if (langid == 1) {
-    if (input == null) output = cmd.runSync("g++ input.cpp && ./a.out");
-    else {
-      fs.writeFileSync("input.txt", input, (err) => {
-        if (err) return console.log(err);
-      });
-      output = cmd.runSync("g++ input.cpp && ./a.out <input.txt");
-      cmd.runSync("rm input.txt");
-    }
-  } else if (req.body.langid == 2) {
-    if (input == null) output = cmd.runSync("python input.py");
-    else {
-      fs.writeFileSync("input.txt", input, (err) => {
-        if (err) return console.log(err);
-      });
-      output = cmd.runSync("python input.py <input.txt");
-      cmd.runSync("rm input.txt");
-    }
-  }
-  res.json({ output });
-  cmd.runSync(`rm input.${languageCode[langid]}`);
-  if (langid == 1) {
-    cmd.runSync("rm a.out");
-  }
-  res.end();
 });
 module.exports = router;
