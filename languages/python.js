@@ -3,7 +3,6 @@ const exec = util.promisify(require("child_process").exec);
 var fs = require("fs");
 
 const python = (input, res) => {
-  console.log("Input");
   fs.writeFile("input.txt", input, (err) => {
     if (err) res.json({ error: err });
     exec("python input.py <input.txt", {

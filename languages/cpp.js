@@ -1,6 +1,7 @@
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 var fs = require("fs");
+
 const cpp = (input, res) => {
   fs.writeFile("input.txt", input, (err) => {
     if (err) res.json({ error: err });
@@ -17,9 +18,7 @@ const cpp = (input, res) => {
       })
       .catch((err) => {
         res.json(err);
-        exec("rm input.cpp && rm a.out").then((resp) =>
-          console.log("CPP File Deleted")
-        );
+        exec("rm input.cpp").then((resp) => console.log("CPP File Deleted"));
         exec("rm input.txt").then((resp) => console.log("Input CPP Deleted"));
       });
   });
