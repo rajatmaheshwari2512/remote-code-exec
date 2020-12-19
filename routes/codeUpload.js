@@ -4,6 +4,7 @@ var fs = require("fs");
 var cppRun = require("../languages/cpp");
 var pythonRun = require("../languages/python");
 var { languageCode } = require("../shared/languageCode");
+var { cppList } = require("../shared/blacklist");
 
 var router = express.Router();
 
