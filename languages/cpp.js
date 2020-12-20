@@ -5,7 +5,7 @@ var fs = require("fs");
 const cpp = (input, res) => {
   fs.writeFile("input.txt", input, (err) => {
     if (err) res.json({ error: err });
-    exec("g++ input.cpp && time -v ./a.out <input.txt", {
+    exec("g++ input.cpp && ./a.out <input.txt", {
       timeout: 5000,
       maxBuffer: 50000,
     })

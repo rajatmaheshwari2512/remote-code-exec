@@ -5,7 +5,7 @@ var fs = require("fs");
 const python = (input, res) => {
   fs.writeFile("input.txt", input, (err) => {
     if (err) res.json({ error: err });
-    exec("time -v python input.py <input.txt", {
+    exec("python3 input.py <input.txt", {
       timeout: 10000,
       maxBuffer: 100000,
     })
