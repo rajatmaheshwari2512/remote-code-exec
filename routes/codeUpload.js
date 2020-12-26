@@ -2,14 +2,16 @@ var express = require("express");
 var fs = require("fs");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
+var randomstring = require("randomstring");
 
 var cppRun = require("../languages/cpp");
 var pythonRun = require("../languages/python");
+var javaRun = require("../languages/java");
 var { languageCode } = require("../shared/languageCode");
 var { cppList } = require("../shared/blacklist");
 var { pythonList } = require("../shared/blacklist");
+var { javaList } = require("../shared/blacklist");
 var validate = require("../shared/validate");
-var randomstring = require("randomstring");
 
 var router = express.Router();
 
@@ -32,14 +34,25 @@ router
           cppRun(input, res, name);
         } else {
           res.json({ error: "invalid code" });
-          exec("rm input.cpp").then((resp) => console.log("Input CPP Deleted"));
+          exec(`rm ${name}.cpp`).then((resp) =>
+            console.log("Input CPP Deleted")
+          );
         }
       } else if (langid == 2) {
         if (validate(pythonList, code)) {
           pythonRun(input, res, name);
         } else {
           res.json({ error: "invalid code" });
-          exec("rm input.py").then((resp) => console.log("Input PY Deleted"));
+          exec(`rm ${name}.py`).then((resp) => console.log("Input PY Deleted"));
+        }
+      } else if (langid == 3) {
+        if (validate(javaList, code)) {
+          javaRun(input, res, name);
+        } else {
+          res.json({ error: "invalid code" });
+          exec(`rm ${name}.java`).then((resp) =>
+            console.log("Input JAVA Deleted")
+          );
         }
       }
     });
