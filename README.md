@@ -76,7 +76,7 @@ To get a local copy up and running follow these simple steps.
   ```
 
 ### Installation
-
+#### If you are on a Linux(preferably Ubuntu) Machine
 1. Clone the repo
    ```sh
    git clone https://github.com/rajatmaheshwari2512/remote-code-exec
@@ -86,18 +86,55 @@ To get a local copy up and running follow these simple steps.
    npm install
    ```
 3. To build the docker images
-  ```sh 
-  cd Dockerfiles 
-  ```
-  ```sh 
-  docker build -t cpp:v1 -f DockerCPP . 
-  ```
-  ```sh 
-  docker build -t python:v1 -f DockerPython . 
-  ```
-  ```sh 
-  docker build -t java:v1 -f DockerJava . 
-  ```
+   ```sh 
+   cd Dockerfiles 
+   ```
+   ```sh 
+   docker build -t cpp:v1 -f DockerCPP . 
+   ```
+   ```sh 
+   docker build -t python:v1 -f DockerPython . 
+   ```
+   ```sh 
+   docker build -t java:v1 -f DockerJava . 
+   ```
+#### If you are on any other Machine
+1. Clone the repo
+   ```sh
+   git clone https://github.com/rajatmaheshwari2512/remote-code-exec
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Build the Server's Dockerfile
+   ```sh
+   docker build -t rceserver:v1 .
+   ```
+4. Run the Docker Image
+   ```sh
+   docker run --privileged=true -v /var/run/docker.sock:/var/run/docker.sock -d -p 3000:3000 rceserver:v1  
+   ```
+5. Create a shell to the created Docker Container
+   ```sh
+   docker ps
+   ```
+   ```sh
+   docker exec -it <container_id> /bin/bash
+   ```
+6. Build the Images inside the Container
+   ```sh 
+   cd Dockerfiles 
+   ```
+   ```sh 
+   docker build -t cpp:v1 -f DockerCPP . 
+   ```
+   ```sh 
+   docker build -t python:v1 -f DockerPython . 
+   ```
+   ```sh 
+   docker build -t java:v1 -f DockerJava . 
+   ```
 <!-- USAGE EXAMPLES -->
 
 ## Usage
