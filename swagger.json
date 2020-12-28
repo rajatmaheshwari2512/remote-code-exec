@@ -44,7 +44,10 @@
                     {
                         "name":"Input Body",
                         "in":"body",
-                        "description":"The Body of the Request"
+                        "description":"The Body of the Request",
+                        "schema":{
+                            "$ref":"#/definitions/Code"
+                        }
                     }
                 ],
                 "summary":"Post the Language, the Code and the Input at this endpoint",
@@ -52,7 +55,7 @@
                     "200":{
                         "description":"OK",
                         "schema":{
-                            "$ref":"#/definitions/Code"
+                            "$ref":"#/definitions/Response"
                         }
                     }
                 }
@@ -60,7 +63,7 @@
         }
     },
     "definitions":{
-        "Code":{
+        "Response":{
             "properties":{
                 "stdout":{
                     "type":"string"
@@ -75,6 +78,20 @@
                 "APIWorking":{
                     "type":"boolean",
                     "default":true
+                }
+            }
+        },
+        "Code":{
+            "properties":{
+                "langid":{
+                    "type":"integer",
+                    "default":2
+                },
+                "code":{
+                    "type":"string"
+                },
+                "input":{
+                    "type":"string"
                 }
             }
         }
