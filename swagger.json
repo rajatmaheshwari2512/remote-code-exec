@@ -22,6 +22,20 @@
     ],
     "paths":{
         "/codeUpload":{
+            "get":{
+                "tags":[
+                    "codeUpload"
+                ],
+                "summary":"Check Health of the API and working status of the server",
+                "responses":{
+                    "200":{
+                        "description":"OK",
+                        "schema":{
+                            "$ref":"#/definitions/Health"
+                        }
+                    }
+                }
+            },
             "post":{
                 "tags":[
                     "codeUpload"
@@ -47,17 +61,20 @@
     },
     "definitions":{
         "Code":{
-            "required":[
-                "langid",
-                "code",
-                "input"
-            ],
             "properties":{
                 "stdout":{
                     "type":"string"
                 },
                 "stderr":{
                     "type":"string"
+                }
+            }
+        },
+        "Health":{
+            "properties":{
+                "APIWorking":{
+                    "type":"boolean",
+                    "default":true
                 }
             }
         }
