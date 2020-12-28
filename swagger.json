@@ -1,0 +1,65 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "version":"1.0.0",
+        "title":"API Explorer for the Remote Code Executor",
+        "description":"API Sandbox for you to familiarize yourself with the API of this server",
+        "license":{
+            "name":"MIT",
+            "url":"https://opensource.org/licenses/MIT"
+        }
+    },
+    "host":"localhost:3000",
+    "basePath":"/",
+    "schemes":[
+        "http"
+    ],
+    "consumes":[
+        "application/json"
+    ],
+    "produces":[
+        "application/json"
+    ],
+    "paths":{
+        "/codeUpload":{
+            "post":{
+                "tags":[
+                    "codeUpload"
+                ],
+                "parameters":[
+                    {
+                        "name":"Input Body",
+                        "in":"body",
+                        "description":"The Body of the Request"
+                    }
+                ],
+                "summary":"Post the Language, the Code and the Input at this endpoint",
+                "responses":{
+                    "200":{
+                        "description":"OK",
+                        "schema":{
+                            "$ref":"#/definitions/Code"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":{
+        "Code":{
+            "required":[
+                "langid",
+                "code",
+                "input"
+            ],
+            "properties":{
+                "stdout":{
+                    "type":"string"
+                },
+                "stderr":{
+                    "type":"string"
+                }
+            }
+        }
+    }
+}

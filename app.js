@@ -4,6 +4,8 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var codeRouter = require("./routes/codeUpload");
 var cors = require("cors");
+var swaggerUi = require("swagger-ui-express"),
+  swaggerDocument = require("./swagger.json");
 
 var app = express();
 
@@ -14,6 +16,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use("/codeupload", codeRouter);
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(function (req, res, next) {
   next(createError(404));
