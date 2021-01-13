@@ -1,7 +1,5 @@
-const java = require("../languages/java");
-
-var pythonList = ["import os", "import subprocess"];
-var cppList = ["popen", "fork", "system(", "unistd.h", "exec"];
+var pythonList = ["import os", "import subprocess","from os import","from subprocess import"];
+var cppList = ["popen", "fork", "system(", "unistd.h"];
 var javaList = [
   "Process",
   "getRuntime()",
