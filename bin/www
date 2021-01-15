@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-
-var app = require("../app");
+var app = require("../app").app;
+var debug = require("debug")("socketiotest:server");
 var http = require("http");
 
 var port = normalizePort(process.env.PORT || "3001");
 app.set("port", port);
 
-var server = http.createServer(app);
+var server = require("../app").server;
 
 server.listen(port);
 server.on("error", onError);

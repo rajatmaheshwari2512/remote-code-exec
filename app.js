@@ -2,13 +2,29 @@ var createError = require("http-errors");
 var express = require("express");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var codeRouter = require("./routes/codeUpload");
 var cors = require("cors");
 var swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./swagger.json");
-var fs=require("fs");
+var http = require("http");
+var socketio = require("socket.io");
+
+var codeRouter = require("./routes/codeUpload");
+const {
+  addUser,
+  removeUser,
+  getUser,
+  getUsersInRoom,
+} = require("./socket/users");
 
 var app = express();
+
+const server = require("http").createServer(app);
+
+const io = socketio(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -31,4 +47,50 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-module.exports = app;
+io.on("connect", (socket) => {
+  socket.on("join", ({ name, room }, callback) => {
+    const { error, user } = addUser({ id: socket.id, name, room });
+
+    if (error) return callback(error);
+
+    socket.join(user.room);
+    console.log(`${user.name}:${room}`);
+    callback();
+  });
+
+  socket.on("sendCode", (message, callback) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit("code", { text: message });
+    callback();
+  });
+  socket.on("sendInput", (input, callback) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit("input", { text: input });
+    callback();
+  });
+  socket.on("sendOutput", (output, callback) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit("output", { text: output });
+    callback();
+  });
+  socket.on("sendFont", (font, callback) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit("font", { text: font });
+    callback();
+  });
+  socket.on("sendDef", (def, callback) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit("default", { text: def });
+    callback();
+  });
+  socket.on("sendLang", (lang, callback) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit("lang", { text: lang });
+    callback();
+  });
+  socket.on("disconnect", () => {
+    const user = removeUser(socket.id);
+  });
+});
+
+module.exports = { app: app, server: server };
