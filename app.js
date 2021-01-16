@@ -54,6 +54,12 @@ io.on("connect", (socket) => {
     if (error) return callback(error);
 
     socket.join(user.room);
+    socket.emit("welcomeMessage", {
+      text: `Welcome to the Room, ${user.name}!`,
+    });
+    socket.broadcast
+      .to(user.room)
+      .emit("welcomeMessage", { text: `${user.name} has joined.` });
     console.log(`${user.name}:${room}`);
     callback();
   });
@@ -78,9 +84,9 @@ io.on("connect", (socket) => {
     io.to(user.room).emit("font", { text: font });
     callback();
   });
-  socket.on("sendDef", (def, callback) => {
+  socket.on("sendMode", (mode, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit("default", { text: def });
+    io.to(user.room).emit("mode", { text: mode });
     callback();
   });
   socket.on("sendLang", (lang, callback) => {
@@ -90,6 +96,7 @@ io.on("connect", (socket) => {
   });
   socket.on("disconnect", () => {
     const user = removeUser(socket.id);
+    console.log(user);
   });
 });
 
