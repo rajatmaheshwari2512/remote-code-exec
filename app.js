@@ -22,7 +22,7 @@ const server = require("http").createServer(app);
 
 const io = socketio(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
   },
 });
 
@@ -97,6 +97,11 @@ io.on("connect", (socket) => {
   socket.on("disconnect", () => {
     const user = removeUser(socket.id);
     console.log(user);
+    if (user) {
+      io.to(user.room).emit("disMess", {
+        text: `${user.name} has left the room`,
+      });
+    }
   });
 });
 
