@@ -24,6 +24,8 @@ const io = socketio(server, {
   cors: {
     origin: "*",
   },
+  pingTimeout: 1000,
+  pingInterval: 3000,
 });
 
 app.use(logger("dev"));
@@ -66,32 +68,44 @@ io.on("connect", (socket) => {
 
   socket.on("sendCode", (message, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit("code", { text: message });
+    if (user) {
+      io.to(user.room).emit("code", { text: message });
+    }
     callback();
   });
   socket.on("sendInput", (input, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit("input", { text: input });
+    if (user) {
+      io.to(user.room).emit("input", { text: input });
+    }
     callback();
   });
   socket.on("sendOutput", (output, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit("output", { text: output });
+    if (user) {
+      io.to(user.room).emit("output", { text: output });
+    }
     callback();
   });
   socket.on("sendFont", (font, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit("font", { text: font });
+    if (user) {
+      io.to(user.room).emit("font", { text: font });
+    }
     callback();
   });
   socket.on("sendMode", (mode, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit("mode", { text: mode });
+    if (user) {
+      io.to(user.room).emit("mode", { text: mode });
+    }
     callback();
   });
   socket.on("sendLang", (lang, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit("lang", { text: lang });
+    if (user) {
+      io.to(user.room).emit("lang", { text: lang });
+    }
     callback();
   });
   socket.on("disconnect", () => {
