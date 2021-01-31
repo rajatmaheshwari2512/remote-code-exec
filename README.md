@@ -152,6 +152,7 @@ To get a local copy up and running follow these simple steps.
     npm start 
     ```
 3.  Note that dev mode uses nodemon so that the server can be changed and restarted easily
+4.  It is important to note that you will have to setup environment variables to the appropriate endpoints, should you deploy this locally or somewhere else
 
 <!-- ROADMAP -->
 
