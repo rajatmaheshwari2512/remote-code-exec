@@ -188,3 +188,6 @@ Project Link: [https://github.com/rajatmaheshwari2512/remote-code-exec](https://
 Site Link: [SwaggerUI Link](http://13.233.119.34:3001/)
 
 Main Site Link: [FrontEnd UI](http://13.233.119.34:3000/)
+
+## Deployment
+- This project is currently deployed on an EC2 Instance provided by AWS
