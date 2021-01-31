@@ -49,11 +49,15 @@ Salient Features:
 - Code Sanitisation
 - An individual Docker Container is created for every code posted on the API, so no code interferes with any other code
 - All Async code so that the server can handle multiple requests without error
+- Socket has been implemented along with rooms for seperate users so that the server can handle multiple users in multiple rooms
+- Keeping it simple, there is not need for signup or login, you can jump in and start coding
+- Timeouts and max memory have been implemented so that no code takes up too much of the server's time
+- Implemented SwaggerUI as an API Sandbox so anyone can explore endpoints and familiarize themselves with the server.
 
 ### Built With
 
-<a href="https://nodejs.org" target="_blank"> <img src="https://img.icons8.com/color/48/000000/nodejs.png"/> </a>
-<a href="https://www.docker.com/" target="_blank"> <img src="https://www.docker.com/sites/default/files/d8/styles/role_icon/public/2019-07/Moby-logo.png?itok=sYH_JEaJ" alt="docker" width="58" height="50"/> </a>
+<a href="https://expressjs.com" target="_blank"> <img src="https://www.vectorlogo.zone/logos/expressjs/expressjs-ar21.svg" alt="express" height="40"/> </a><a href="https://reactjs.org/" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="react" width="60" height="40"/> </a><a href="https://nodejs.org" target="_blank"> <img src="https://img.icons8.com/color/48/000000/nodejs.png"/> </a>
+<a href="https://www.docker.com/" target="_blank"> <img src="https://www.docker.com/sites/default/files/d8/styles/role_icon/public/2019-07/Moby-logo.png?itok=sYH_JEaJ" alt="docker" width="58" height="50"/> </a> 
 
 <!-- GETTING STARTED -->
 
@@ -180,3 +184,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Rajat Maheshwari - mrajat67@yahoo.com
 
 Project Link: [https://github.com/rajatmaheshwari2512/remote-code-exec](https://github.com/rajatmaheshwari2512/remote-code-exec)
+
+Site Link: [SwaggerUI Link](http://13.233.119.34:3001/)
+
+Main Site Link: [FrontEnd UI](http://13.233.119.34:3000/)
