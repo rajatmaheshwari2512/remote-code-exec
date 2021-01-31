@@ -35,6 +35,8 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#deployment">Deployment</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
   </ol>
 </details>
 
@@ -192,3 +194,10 @@ Main Site Link: [FrontEnd UI](http://13.233.119.34:3000/)
 
 ## Deployment
 - This project is currently deployed on an EC2 Instance provided by AWS
+
+## Screenshots
+<img src="https://i.imgur.com/FOKwshQ.png"></img>
+<img src="https://i.imgur.com/lb6Mcjx.png"></img>
+<img src="https://i.imgur.com/npnqlZb.png"></img>
+<img src="https://i.imgur.com/QxxhIju.png"></img>
+<img src="https://i.imgur.com/OtICDoU.png"></img>
