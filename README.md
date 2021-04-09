@@ -188,9 +188,9 @@ Rajat Maheshwari - mrajat67@yahoo.com
 
 Project Link: [https://github.com/rajatmaheshwari2512/remote-code-exec](https://github.com/rajatmaheshwari2512/remote-code-exec)
 
-Site Link: [SwaggerUI Link](http://13.233.119.34:3001/)
+Site Link: [SwaggerUI Link](http://65.0.131.144:3001/)
 
-Main Site Link: [FrontEnd UI](http://13.233.119.34:3000/)
+Main Site Link: [FrontEnd UI](http://www.rceui.ml/)
 
 ## Deployment
 - This project is currently deployed on an EC2 Instance provided by AWS
