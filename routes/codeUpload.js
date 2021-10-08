@@ -7,10 +7,12 @@ var randomstring = require("randomstring");
 var cppRun = require("../languages/cpp");
 var pythonRun = require("../languages/python");
 var javaRun = require("../languages/java");
+var goRun = require("../languages/go");
 var { languageCode } = require("../shared/languageCode");
 var { cppList } = require("../shared/blacklist");
 var { pythonList } = require("../shared/blacklist");
 var { javaList } = require("../shared/blacklist");
+var { goList } = require("../shared/blacklist");
 var validate = require("../shared/validate");
 
 var router = express.Router();
@@ -52,6 +54,16 @@ router
           res.json({ error: "invalid code" });
           exec(`rm ${name}.java`).then((resp) =>
             console.log("Input JAVA Deleted")
+          );
+        }
+      } else if (langid == 4) {
+        if (validate(goList, code)) {
+          goRun(input, res, name);
+        }
+        else {
+          res.json({ error: "invalid code" });
+          exec(`rm ${name}.go`).then((resp) =>
+            console.log("Input go Deleted")
           );
         }
       }
