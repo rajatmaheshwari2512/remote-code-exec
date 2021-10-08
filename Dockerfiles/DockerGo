@@ -1,0 +1,7 @@
+FROM ubuntu
+WORKDIR /usr/src/app
+RUN apt-get update
+RUN apt-get install wget -y
+RUN wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
+RUN rm -rf /usr/local/go 
+RUN tar -C /usr/local -xzf go1.17.2.linux-amd64.tar.gz
