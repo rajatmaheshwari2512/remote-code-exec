@@ -7,6 +7,10 @@ var javaList = [
   "ProcessBuilder",
   "start()",
 ];
+var goList = [
+
+]
 exports.pythonList = pythonList;
 exports.cppList = cppList;
 exports.javaList = javaList;
+exports.goList = goList;
