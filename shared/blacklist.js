@@ -8,7 +8,8 @@ var javaList = [
   "start()",
 ];
 var goList = [
-
+  "os/exec",
+  "runtime"
 ]
 exports.pythonList = pythonList;
 exports.cppList = cppList;
