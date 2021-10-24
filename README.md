@@ -104,6 +104,9 @@ To get a local copy up and running follow these simple steps.
    ```sh 
    docker build -t java:v1 -f DockerJava . 
    ```
+   ```sh 
+   docker build -t go:v1 -f DockerGo . 
+   ```
 #### If you are on any other Machine
 1. Clone the repo
    ```sh
@@ -140,6 +143,9 @@ To get a local copy up and running follow these simple steps.
    ```
    ```sh 
    docker build -t java:v1 -f DockerJava . 
+   ```
+   ```sh 
+   docker build -t go:v1 -f DockerGo . 
    ```
 <!-- USAGE EXAMPLES -->
 
