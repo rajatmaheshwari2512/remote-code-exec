@@ -1,12 +1,12 @@
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
-var fs = require("fs");
+let fs = require("fs");
 
 const java = (input, res, name) => {
   fs.writeFile(`${name}.txt`, input, (err) => {
     if (err) res.json({ error: err });
     exec("docker run -d -it java:v1 /bin/bash").then((resp) => {
-      var id = resp.stdout.substring(0, 12);
+      let id = resp.stdout.substring(0, 12);
       exec(
         `docker cp ${name}.java ${id}:/usr/src/app/test.java && docker cp ${name}.txt ${id}:/usr/src/app/input.txt && docker exec ${id} bash -c "javac test.java && java test<input.txt"`,
         { timeout: 15000, maxBuffer: 50000 }
