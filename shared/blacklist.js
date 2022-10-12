@@ -1,5 +1,6 @@
 var pythonList = ["import os", "import subprocess","from os import","from subprocess import"];
 var cppList = ["popen", "fork", "system(", "unistd.h"];
+var cList = ["fork", "system("];
 var javaList = [
   "Process",
   "getRuntime()",
@@ -15,3 +16,4 @@ exports.pythonList = pythonList;
 exports.cppList = cppList;
 exports.javaList = javaList;
 exports.goList = goList;
+exports.cList = cList;

@@ -5,6 +5,7 @@ const exec = util.promisify(require("child_process").exec);
 var randomstring = require("randomstring");
 
 var cppRun = require("../languages/cpp");
+var cRun = require("../languages/c");
 var pythonRun = require("../languages/python");
 var javaRun = require("../languages/java");
 var goRun = require("../languages/go");
@@ -13,6 +14,7 @@ var { cppList } = require("../shared/blacklist");
 var { pythonList } = require("../shared/blacklist");
 var { javaList } = require("../shared/blacklist");
 var { goList } = require("../shared/blacklist");
+var { cList } = require("../shared/blacklist");
 var validate = require("../shared/validate");
 
 var router = express.Router();
@@ -64,6 +66,16 @@ router
           res.json({ error: "invalid code" });
           exec(`rm ${name}.go`).then((resp) =>
             console.log("Input go Deleted")
+          );
+        }
+      } else if (langid == 5) {
+        if (validate(cList, code)) {
+          cRun(input, res, name);
+        }
+        else {
+          res.json({ error: "invalid code" });
+          exec(`rm ${name}.c`).then((resp) =>
+            console.log("Input c Deleted")
           );
         }
       }
