@@ -1,23 +1,23 @@
-var express = require("express");
-var fs = require("fs");
+let express = require("express");
+let fs = require("fs");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
-var randomstring = require("randomstring");
+let randomstring = require("randomstring");
 
-var cppRun = require("../languages/cpp");
-var cRun = require("../languages/c");
-var pythonRun = require("../languages/python");
-var javaRun = require("../languages/java");
-var goRun = require("../languages/go");
-var { languageCode } = require("../shared/languageCode");
-var { cppList } = require("../shared/blacklist");
-var { pythonList } = require("../shared/blacklist");
-var { javaList } = require("../shared/blacklist");
-var { goList } = require("../shared/blacklist");
-var { cList } = require("../shared/blacklist");
-var validate = require("../shared/validate");
+let cppRun = require("../languages/cpp");
+let cRun = require("../languages/c");
+let pythonRun = require("../languages/python");
+let jaletun = require("../languages/java");
+let goRun = require("../languages/go");
+let { languageCode } = require("../shared/languageCode");
+let { cppList } = require("../shared/blacklist");
+let { pythonList } = require("../shared/blacklist");
+let { javaList } = require("../shared/blacklist");
+let { goList } = require("../shared/blacklist");
+let { cList } = require("../shared/blacklist");
+let validate = require("../shared/validate");
 
-var router = express.Router();
+let router = express.Router();
 
 router
   .get("/", (req, res, next) => {
@@ -27,7 +27,7 @@ router
     const code = req.body.code;
     const langid = req.body.langid;
     const input = req.body.input;
-    var name = randomstring.generate({
+    let name = randomstring.generate({
       length: 7,
       charset: "alphabetic",
     });
@@ -51,7 +51,7 @@ router
         }
       } else if (langid == 3) {
         if (validate(javaList, code)) {
-          javaRun(input, res, name);
+          jaletun(input, res, name);
         } else {
           res.json({ error: "invalid code" });
           exec(`rm ${name}.java`).then((resp) =>

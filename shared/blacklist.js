@@ -1,14 +1,14 @@
-var pythonList = ["import os", "import subprocess","from os import","from subprocess import"];
-var cppList = ["popen", "fork", "system(", "unistd.h"];
-var cList = ["fork", "system("];
-var javaList = [
+let pythonList = ["import os", "import subprocess","from os import","from subprocess import"];
+let cppList = ["popen", "fork", "system(", "unistd.h"];
+let cList = ["fork", "system("];
+let javaList = [
   "Process",
   "getRuntime()",
   "exec(",
   "ProcessBuilder",
   "start()",
 ];
-var goList = [
+let goList = [
   "os/exec",
   "runtime"
 ]

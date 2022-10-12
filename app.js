@@ -1,14 +1,14 @@
-var createError = require("http-errors");
-var express = require("express");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var cors = require("cors");
-var swaggerUi = require("swagger-ui-express"),
+let createError = require("http-errors");
+let express = require("express");
+let cookieParser = require("cookie-parser");
+let logger = require("morgan");
+let cors = require("cors");
+let swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./swagger.json");
-var http = require("http");
-var socketio = require("socket.io");
+let http = require("http");
+let socketio = require("socket.io");
 
-var codeRouter = require("./routes/codeUpload");
+let codeRouter = require("./routes/codeUpload");
 const {
   addUser,
   removeUser,
@@ -16,7 +16,7 @@ const {
   getUsersInRoom,
 } = require("./socket/users");
 
-var app = express();
+let app = express();
 
 const server = require("http").createServer(app);
 
