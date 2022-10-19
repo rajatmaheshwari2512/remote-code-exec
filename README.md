@@ -107,6 +107,9 @@ To get a local copy up and running follow these simple steps.
    ```sh 
    docker build -t go:v1 -f DockerGo . 
    ```
+   ```sh
+   docker build -t c:v1 -f DockerC .
+   ```
 #### If you are on any other Machine
 1. Clone the repo
    ```sh
@@ -146,6 +149,9 @@ To get a local copy up and running follow these simple steps.
    ```
    ```sh 
    docker build -t go:v1 -f DockerGo . 
+   ```
+   ```sh
+   docker build -t c:v1 -f DockerC .
    ```
 <!-- USAGE EXAMPLES -->
 
